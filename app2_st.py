@@ -20,6 +20,11 @@ if 'camera_active' not in st.session_state:
 # Function to run inference and display video frames
 def run_camera():
     cap = cv2.VideoCapture(0)
+
+    if not cap.isOpened():
+        st.error("Failed to open the camera. Please check camera connection or permissions.")
+        return
+
     stframe = st.empty()
     while st.session_state.camera_active:
         success, frame = cap.read()
